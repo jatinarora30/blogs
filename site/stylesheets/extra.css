@@ -1,0 +1,35 @@
+/* Profile card at the top of the left sidebar */
+.profile-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: .25rem; margin: .6rem .6rem 1rem; padding: 1rem .6rem;
+  border-radius: .6rem; border: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color) !important;
+  transition: border-color .15s, background-color .15s;
+}
+.profile-card:hover { border-color: var(--md-accent-fg-color); background: var(--md-accent-fg-color--transparent); }
+.profile-card__avatar {
+  width: 4.5rem; height: 4.5rem; border-radius: 50%; object-fit: cover;
+  margin-bottom: .35rem; box-shadow: 0 0 0 2px var(--md-default-bg-color), 0 0 0 4px var(--md-accent-fg-color);
+}
+.profile-card__avatar--initials {
+  display: grid; place-items: center; font-size: 1.4rem; font-weight: 700; letter-spacing: .03em;
+  background: var(--md-accent-fg-color); color: var(--md-accent-bg-color);
+}
+.profile-card__name { font-weight: 700; font-size: .8rem; }
+.profile-card__tagline { font-size: .65rem; color: var(--md-default-fg-color--light); line-height: 1.3; }
+.profile-card__link { font-size: .65rem; color: var(--md-accent-fg-color); margin-top: .2rem; }
+
+
+/* Home: single-line hero */
+.md-typeset h1.hero {
+  font-size: .9rem; font-weight: 400; font-style: italic; line-height: 1.7; letter-spacing: 0;
+  max-width: 32rem; margin: 18vh auto 0; text-align: center;
+  color: var(--md-default-fg-color);
+}
+.md-typeset h1.hero a {
+  color: var(--md-accent-fg-color);
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
+  transition: background-size .25s;
+}
+.md-typeset h1.hero a:hover { background-size: 100% 2px; }
+@media (max-width: 45em) { .md-typeset h1.hero { margin-top: 8vh; } }

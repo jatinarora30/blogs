@@ -1,0 +1,81 @@
+site_name: Blogs
+site_description: Long-form notes on C++ performance and robotics, with code and benchmarks.
+site_url: https://jatinarora30.github.io/blogs/
+repo_url: https://github.com/jatinarora30/blogs
+repo_name: blogs
+edit_uri: ""
+
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - navigation.sections     # sections shown as book chapters in the sidebar
+    - navigation.indexes      # section index.md becomes the chapter page
+    - navigation.footer       # previous / next like a book
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+    - search.highlight
+    - toc.follow
+  icon:
+    logo: material/book-open-page-variant
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: indigo
+      toggle: { icon: material/weather-night, name: Dark mode }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle: { icon: material/weather-sunny, name: Light mode }
+
+hooks:
+  - hooks/release.py          # drafts stay hidden until `released: true`
+
+plugins:
+  - search
+  - awesome-pages             # nav built from folders; .pages sets titles/order
+  - tags
+
+extra:
+  generator: false
+  profile:                    # left-sidebar card
+    name: Jatin Kumar Arora
+    tagline: Robotics Engineer · Safe Autonomy
+    url: https://jatinarora30.github.io/jatin-arora.github.io/
+    initials: JA
+    avatar: ""                # e.g. assets/images/me.jpg for a photo instead of initials
+  social:
+    - icon: material/account-circle
+      link: https://jatinarora30.github.io/jatin-arora.github.io/
+      name: Profile
+    - icon: fontawesome/brands/github
+      link: https://github.com/jatinarora30
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc: { permalink: true }
+  - pymdownx.details
+  - pymdownx.highlight: { anchor_linenums: true, line_spans: __span, pygments_lang_class: true }
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.arithmatex: { generic: true }
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed: { alternate_style: true }
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js

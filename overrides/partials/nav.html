@@ -1,0 +1,41 @@
+{#- Copy of Material's partials/nav.html with a profile card above the nav. -#}
+{% import "partials/nav-item.html" as item with context %}
+{% set class = "md-nav md-nav--primary" %}
+{% if "navigation.tabs" in features %}
+  {% set class = class ~ " md-nav--lifted" %}
+{% endif %}
+{% if "toc.integrate" in features %}
+  {% set class = class ~ " md-nav--integrated" %}
+{% endif %}
+<nav class="{{ class }}" aria-label="{{ lang.t('nav') }}" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-nav__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+      {% include "partials/logo.html" %}
+    </a>
+    {{ config.site_name }}
+  </label>
+  {% set p = config.extra.profile %}
+  {% if p %}
+    <a class="profile-card" href="{{ p.url }}" title="About {{ p.name | e }}">
+      {% if p.avatar %}
+        <img class="profile-card__avatar" src="{{ p.avatar | url }}" alt="{{ p.name | e }}">
+      {% else %}
+        <span class="profile-card__avatar profile-card__avatar--initials">{{ p.initials }}</span>
+      {% endif %}
+      <span class="profile-card__name">{{ p.name }}</span>
+      <span class="profile-card__tagline">{{ p.tagline }}</span>
+      <span class="profile-card__link">View profile ↗</span>
+    </a>
+  {% endif %}
+  {% if config.repo_url %}
+    <div class="md-nav__source">
+      {% include "partials/source.html" %}
+    </div>
+  {% endif %}
+  <ul class="md-nav__list" data-md-scrollfix>
+    {% for nav_item in nav %}
+      {% set path = "__nav_" ~ loop.index %}
+      {{ item.render(nav_item, path, 1) }}
+    {% endfor %}
+  </ul>
+</nav>
