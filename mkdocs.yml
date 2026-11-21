@@ -1,17 +1,18 @@
-site_name: Blogs
-site_description: Long-form notes on C++ performance and robotics, with code and benchmarks.
+site_name: Loose Notes
+site_description: Loose notes on whatever I am building, breaking and learning.
 site_url: https://jatinarora30.github.io/blogs/
 repo_url: https://github.com/jatinarora30/blogs
 repo_name: blogs
 edit_uri: ""
+exclude_docs: |
+  *.drawio
+
 
 theme:
   name: material
   custom_dir: overrides
   features:
-    - navigation.sections     # sections shown as book chapters in the sidebar
-    - navigation.indexes      # section index.md becomes the chapter page
-    - navigation.footer       # previous / next like a book
+    - navigation.footer       # previous / next between posts
     - navigation.top
     - content.code.copy
     - content.code.annotate
@@ -32,15 +33,15 @@ theme:
       toggle: { icon: material/weather-sunny, name: Light mode }
 
 hooks:
-  - hooks/release.py          # drafts stay hidden until `released: true`
+  - hooks/release.py          # drafts hidden until `released: true`; flat nav, newest first
 
 plugins:
   - search
-  - awesome-pages             # nav built from folders; .pages sets titles/order
   - tags
 
 extra:
   generator: false
+  default_contributors: [jatinarora30]   # used when a post has no `contributors:`
   profile:                    # left-sidebar card
     name: Jatin Kumar Arora
     tagline: Robotics Engineer · Safe Autonomy
@@ -64,6 +65,7 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.highlight: { anchor_linenums: true, line_spans: __span, pygments_lang_class: true }
   - pymdownx.inlinehilite
+  - pymdownx.magiclink       # bare URLs become clickable links
   - pymdownx.snippets
   - pymdownx.arithmatex: { generic: true }
   - pymdownx.superfences:

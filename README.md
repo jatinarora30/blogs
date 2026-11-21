@@ -1,65 +1,62 @@
-# Blogs
+# Loose Notes
 
-A Markdown book of long-form posts on **C++ performance** and **robotics**, built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published to GitHub Pages at **https://jatinarora30.github.io/blogs/**.
+Long-form posts on whatever I'm building, breaking and learning. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published to GitHub Pages at **https://jatinarora30.github.io/blogs/**.
 
 Profile: https://jatinarora30.github.io/jatin-arora.github.io/
 
-## How it works
+## Layout
 
 ```
 docs/
-  index.md               # home page; table of contents is generated
-  .pages                 # top-level nav (Home, sections…, Profile link)
-  cpp/                   # a section = a folder
-    .pages               #   title: C++
-    index.md             #   section page; post list is generated
-    caches-and-cpp.md    #   a post
-  robotics/
-    ...
-hooks/release.py         # release gate + generated listings
-templates/post.md        # new-post template
+  index.md                 # homepage (one-line intro)
+  my-post.md               # one file per post, all at this level (no sections)
+  assets/my-post/          # images for that post
+hooks/release.py           # release gate + sidebar ordering (newest first)
+overrides/partials/        # profile card (left) and contributors box (right)
+templates/post.md          # new-post template
 ```
 
-- **Sections:** every folder in `docs/` is a chapter. Drop a `.md` file into a folder and it appears in that section's sidebar, its section page and the home page.
-- **Release gate:** a post is published only when its front matter has `released: true`. Drafts can be committed and pushed freely. The GitHub Actions build leaves them out, and a section with no released posts is hidden. Links from a published post to an unreleased one show as plain text until that post is released.
+## Writing a post
+
+```bash
+make new slug=my-post title="My Post"     # creates docs/my-post.md and docs/assets/my-post/
+make serve                                # http://127.0.0.1:8000/blogs/ (drafts visible)
+```
 
 ```yaml
 ---
-title: "Error-State Kalman Filter from Scratch"
+title: "My Post"
 date: 2026-11-20
-released: false   # set to true to publish
-tags: [state-estimation]
+released: false                 # true removes the Draft banner
+tags: []
+contributors: [jatinarora30]    # GitHub usernames, shown in the right sidebar
 ---
 ```
+
+- **Drafts:** posts without `released: true` still go online, with a "Draft" banner at the top. Set `released: true` to remove the banner.
+- **Images:** `![alt](assets/my-post/diagram.png)`
+- **Commands and output:** fenced blocks with titles, e.g. ```` ```bash title="Command" ````
+- **Also supported:** math (`\( \)`, `\[ \]`), ` ```mermaid ` diagrams, and callouts (`!!! note`)
 
 ## Commands
 
 ```bash
-make setup                                        # create .venv, install deps (once)
-make serve                                        # preview with drafts → http://127.0.0.1:8000/blogs/
-make serve-live                                   # preview only what will be published
-make status                                       # which posts are released
-make new section=robotics slug=my-post title="My Post"
-make section name=systems title="Systems"          # add a new chapter
-make build                                        # production build into site/
+make setup        # create .venv and install deps (once)
+make serve        # preview with drafts
+make serve-live   # preview only released posts
+make status       # released / draft for each post
+make build        # production build into site/
 ```
 
-## Writing
+## Contributions
 
-- Math: `\( inline \)` and `\[ display \]`
-- Diagrams: ` ```mermaid ` code blocks
-- Callouts: `!!! note`, `!!! warning`, `??? tip "Collapsible"`
-- Images: store them next to the post or in `docs/assets/images/`, then use relative links
+Each post's right sidebar lists its contributors and has a **Raise a request** button, which opens an issue using `.github/ISSUE_TEMPLATE/contribution.md`. It also links to editing the page on GitHub, which leads to a PR. When you accept a contribution, add the contributor's username to `contributors:`.
 
 ## Publishing
 
-Workflow: write the post → `make serve` to check it → set `released: true` → `git push`.
+Write → `make serve` → set `released: true` → `git push`. The GitHub Actions workflow builds and deploys to Pages.
 
-On every push to `main`, `.github/workflows/deploy.yml` builds the site with `--strict` and deploys it to GitHub Pages.
-
-### One-time setup
-
-1. Create a GitHub repository named **`blogs`** under `jatinarora30`. The repository name becomes the URL path, so if you choose a different name, update `site_url` in `mkdocs.yml` to match.
+One-time setup:
+1. Create a public repo `jatinarora30/blogs`. If you use a different name, update `site_url` and `repo_url` in `mkdocs.yml`.
 2. `git remote add origin git@github.com:jatinarora30/blogs.git && git push -u origin main`
-3. In the repository, go to **Settings → Pages → Source** and select **GitHub Actions**.
-4. Add a link on your home site: `<a href="https://jatinarora30.github.io/blogs/">Blog</a>`
+3. In the repo, go to **Settings → Pages → Source** and choose **GitHub Actions**.

@@ -1,5 +1,4 @@
-name: Deploy to GitHub Pages
-
+name: Deploy blog
 on:
   push:
     branches: [main]
@@ -10,33 +9,24 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
+concurrency: { group: pages, cancel-in-progress: true }
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
+        with: { python-version: "3.12", cache: pip }
       - run: pip install -r requirements.txt
       - run: mkdocs build --strict
-        env:
-          SHOW_DRAFTS: "0"
       - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
+        with: { path: site }
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    environment: { name: github-pages, url: "${{ steps.deployment.outputs.page_url }}" }
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4

@@ -1,8 +1,9 @@
 ---
 title: "{{TITLE}}"
 date: {{DATE}}
-released: false   # set to true to publish
+released: false   # true removes the Draft banner
 tags: []
+contributors: [jatinarora30]   # GitHub usernames
 ---
 
 # {{TITLE}}

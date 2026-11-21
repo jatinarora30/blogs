@@ -1,0 +1,16 @@
+# Run the blog locally
+# Open http://127.0.0.1:8000/blogs/ after starting. Press Ctrl+C to stop.
+
+# First time only: install dependencies
+cd ~/blogs && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+# Preview with drafts (auto-reloads when you save)
+cd ~/blogs && .venv/bin/mkdocs serve
+
+# Preview only what's released (what the live site will show)
+cd ~/blogs && SHOW_DRAFTS=0 .venv/bin/mkdocs serve
+
+# New post: make new slug=my-post title="My Post"
+
+# Publish to GitHub Pages: set "released: true" in the post, then
+cd ~/blogs && git add . && git commit -m "Update blog" && git push
