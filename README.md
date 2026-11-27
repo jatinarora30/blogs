@@ -1,6 +1,6 @@
 # Loose Notes
 
-Long-form posts on whatever I'm building, breaking and learning. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published to GitHub Pages at **https://jatinarora30.github.io/blogs/**.
+My open-source work. Each pull request gets its own page in `docs/`, written by hand. The homepage lists them, grouped by repo with a status badge, built by `hooks/open_source.py` from each page's `pr:` and `status:` front matter. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published to GitHub Pages at **https://jatinarora30.github.io/blogs/**.
 
 Profile: https://jatinarora30.github.io/jatin-arora.github.io/
 
@@ -8,15 +8,16 @@ Profile: https://jatinarora30.github.io/jatin-arora.github.io/
 
 ```
 docs/
-  index.md                 # homepage (one-line intro)
-  my-post.md               # one file per post, all at this level (no sections)
+  index.md                 # homepage: intro + PR list (replaces <!-- OSS_PRS -->)
+  my-post.md               # one file per post; one page per PR
   assets/my-post/          # images for that post
 hooks/release.py           # release gate + sidebar ordering (newest first)
 overrides/partials/        # profile card (left) and contributors box (right)
-templates/post.md          # new-post template
+hooks/open_source.py       # homepage PR list from posts' `pr:` / `status:`
+templates/post.md          # PR write-up template
 ```
 
-## Writing a post
+## Adding a PR
 
 ```bash
 make new slug=my-post title="My Post"     # creates docs/my-post.md and docs/assets/my-post/
@@ -28,6 +29,8 @@ make serve                                # http://127.0.0.1:8000/blogs/ (drafts
 title: "My Post"
 date: 2026-11-20
 released: false                 # true removes the Draft banner
+pr: https://github.com/OWNER/REPO/pull/123   # the PR this page is about
+status: merged                  # merged | open | draft | closed
 tags: []
 contributors: [jatinarora30]    # GitHub usernames, shown in the right sidebar
 ---

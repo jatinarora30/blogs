@@ -23,7 +23,7 @@
 /* Home: single-line hero */
 .md-typeset h1.hero {
   font-size: .9rem; font-weight: 400; font-style: italic; line-height: 1.7; letter-spacing: 0;
-  max-width: 32rem; margin: 18vh auto 0; text-align: center;
+  max-width: 32rem; margin: 2rem auto 1.5rem; text-align: center;
   color: var(--md-default-fg-color);
 }
 .md-typeset h1.hero a {
@@ -32,7 +32,7 @@
   transition: background-size .25s;
 }
 .md-typeset h1.hero a:hover { background-size: 100% 2px; }
-@media (max-width: 45em) { .md-typeset h1.hero { margin-top: 8vh; } }
+@media (max-width: 45em) { .md-typeset h1.hero { margin-top: 1rem; } }
 
 /* Figures */
 .md-typeset figure img { border-radius: .4rem; }
@@ -63,4 +63,33 @@
 /* Show the contributors box only in the right sidebar; keep it in the menu on phones */
 @media screen and (min-width: 60em) {
   .md-nav--primary .contrib-box { display: none; }
+}
+
+/* Open Source page */
+.oss-stats { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 1.5rem; }
+.oss-stat {
+  padding: .3rem .7rem; border-radius: 1rem; font-size: .7rem;
+  border: 1px solid var(--md-default-fg-color--lightest); color: var(--md-default-fg-color--light);
+}
+.oss-stat b { color: var(--md-default-fg-color); }
+.md-typeset .oss-repo h2 { font-size: .9rem; margin: 1.6rem 0 .4rem; }
+.md-typeset ul.oss-list { list-style: none; margin: 0; padding: 0; }
+.md-typeset ul.oss-list li {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .6rem;
+  margin: 0; padding: .5rem 0; border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+.oss-title { flex: 1 1 16rem; }
+.oss-writeup { font-size: .7rem; font-weight: 600; white-space: nowrap; }
+.oss-meta { font-size: .65rem; color: var(--md-default-fg-color--light); white-space: nowrap; }
+.oss-badge {
+  font-size: .55rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  padding: .1rem .45rem; border-radius: .3rem; color: #fff; min-width: 3.6rem; text-align: center;
+}
+.oss-badge--merged { background: #8250df; }
+.oss-badge--open   { background: #1a7f37; }
+.oss-badge--draft  { background: #6e7781; }
+.oss-badge--closed { background: #cf222e; }
+.oss-empty {
+  margin: 1.5rem 0; padding: 1rem 1.2rem; border-radius: .6rem; font-style: italic;
+  border: 1px dashed var(--md-default-fg-color--lighter); color: var(--md-default-fg-color--light);
 }

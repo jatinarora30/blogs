@@ -1,11 +1,14 @@
 site_name: Loose Notes
-site_description: Loose notes on whatever I am building, breaking and learning.
+site_description: Pull requests I've opened on open-source projects.
 site_url: https://jatinarora30.github.io/blogs/
 repo_url: https://github.com/jatinarora30/blogs
 repo_name: blogs
 edit_uri: ""
+# caches-and-cpp.md is an old blog post, kept on disk but not published
 exclude_docs: |
   *.drawio
+  caches-and-cpp.md
+  assets/caches-and-cpp/
 
 
 theme:
@@ -34,6 +37,7 @@ theme:
 
 hooks:
   - hooks/release.py          # drafts hidden until `released: true`; flat nav, newest first
+  - hooks/open_source.py      # homepage PR list, built from posts with `pr:`
 
 plugins:
   - search

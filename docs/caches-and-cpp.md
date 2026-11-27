@@ -63,9 +63,16 @@ If you add a local variable  , update that in a thread then update in main array
 
 
 
+Caches are organized in cache lines, if i call for 1 byte that i care about, the whole line will be brought up from the memory.
+
+Explains why row major performance is better because u get the whole cache line, in row major u need to pull cache line for each byte.
+
+Cache Prefetching, the hardware predicts which way you are going, and it pulls the data or instruction from the main memory , before even call and avoids memory latency
+
 ## References
 
 - [Cache Warming & Prefetching: C++ Performance Guide](https://towardsdev.com/cache-warming-prefetching-cpp-performance-guide-68b2f693af56) — Towards Dev
 - [Types of Cache](https://www.geeksforgeeks.org/system-design/types-of-cache/) — GeeksforGeeks
 - [View size of CPU cache through the command line](https://askubuntu.com/questions/724449/view-size-of-cpu-cache-through-the-command-line) — Ask Ubuntu
 - [What is the difference between L1 cache and L2 cache?](https://stackoverflow.com/questions/3699582/what-is-the-difference-between-l1-cache-and-l2-cache) — Stack Overflow
+- https://www.youtube.com/watch?v=WDIkqP4JbkE&t=939s

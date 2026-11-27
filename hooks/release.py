@@ -7,7 +7,7 @@ Rules
   Anything else (missing, false) is a draft: it is still published, but with a
   "Draft" banner at the top of the article.
 * SHOW_DRAFTS=0 hides drafts entirely (in serve or build).
-* The sidebar lists posts newest first, followed by the Profile link.
+* Sidebar: Pull Requests (posts, newest first, if any), then the standalone PAGES, then the Profile link.
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ import posixpath
 import re
 
 from mkdocs.structure.files import Files
-from mkdocs.structure.nav import Link
+from mkdocs.structure.nav import Link, Section
 from mkdocs.structure.pages import Page
 from mkdocs.utils.meta import get_data
 
@@ -36,15 +36,19 @@ def on_startup(command, dirty):
     SHOW_DRAFTS = env != "0"
 
 
+PAGES: list[str] = []   # standalone pages, listed after the posts
+
+
 def _is_post(src_uri: str) -> bool:
-    return src_uri.endswith(".md") and "/" not in src_uri and src_uri != "index.md"
+    return (src_uri.endswith(".md") and "/" not in src_uri
+            and src_uri != "index.md" and src_uri not in PAGES)
 
 
 def on_files(files: Files, config):
     POSTS.clear(); HIDDEN.clear()
     kept = []
     for f in files:
-        if not _is_post(f.src_uri):
+        if not _is_post(f.src_uri) or not f.inclusion.is_included():
             kept.append(f)
             continue
         with open(f.abs_src_path, encoding="utf-8") as fh:
@@ -82,7 +86,12 @@ def on_nav(nav, config, files):
         page.previous_page = posts[i - 1] if i > 0 else None
         page.next_page = posts[i + 1] if i + 1 < len(posts) else None
 
-    items = list(posts)
+    notes = Section("Pull Requests", list(posts))
+    for page in posts:
+        page.parent = notes
+    items = [notes] if posts else []
+    by_uri = {i.file.src_uri: i for i in nav.items if isinstance(i, Page)}
+    items += [by_uri[u] for u in PAGES if u in by_uri]
     profile = (config.extra.get("profile") or {}).get("url")
     if profile:
         items.append(Link("Profile ↗", profile))
