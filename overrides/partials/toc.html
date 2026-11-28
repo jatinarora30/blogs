@@ -1,4 +1,4 @@
-{#- Copy of Material's partials/toc.html with a contributors box on posts. -#}
+{#- Copy of Material's partials/toc.html with a contributors box on PR pages. -#}
 {% set title = lang.t("toc") %}
 {% if config.mdx_configs.toc and config.mdx_configs.toc.title %}
   {% set title = config.mdx_configs.toc.title %}
@@ -18,7 +18,7 @@
           </li>
         {% endfor %}
       </ul>
-      <p class="contrib-box__cta">Want to contribute? Raise a request, let's make this an interesting series.</p>
+      <p class="contrib-box__cta">Spotted a mistake in this write-up, or have a better approach? Let me know.</p>
       <a class="contrib-box__button" href="{{ repo }}/issues/new?template=contribution.md&title={{ ('[' ~ page.title ~ '] ') | urlencode }}">Raise a request</a>
       <a class="contrib-box__edit" href="{{ repo }}/edit/main/docs/{{ page.file.src_uri }}">or suggest an edit ↗</a>
     </div>

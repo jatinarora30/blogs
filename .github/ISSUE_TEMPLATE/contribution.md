@@ -1,13 +1,13 @@
 ---
 name: Contribution request
-about: Propose an addition, correction, experiment or follow-up for a post
+about: Suggest a correction or addition to a PR write-up
 labels: contribution
 ---
 
-**Post:** <!-- title or link -->
+**PR page:** <!-- title or link -->
 
 **What would you like to contribute?**
-<!-- e.g. a correction, a benchmark on different hardware, a new section, a follow-up post in the series -->
+<!-- e.g. a correction, a better fix, a related issue, a missing detail -->
 
 **Details / draft:**
 

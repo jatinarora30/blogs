@@ -4,18 +4,12 @@ site_url: https://jatinarora30.github.io/blogs/
 repo_url: https://github.com/jatinarora30/blogs
 repo_name: blogs
 edit_uri: ""
-# caches-and-cpp.md is an old blog post, kept on disk but not published
-exclude_docs: |
-  *.drawio
-  caches-and-cpp.md
-  assets/caches-and-cpp/
-
 
 theme:
   name: material
   custom_dir: overrides
   features:
-    - navigation.footer       # previous / next between posts
+    - navigation.footer       # previous / next between PR pages
     - navigation.top
     - content.code.copy
     - content.code.annotate
@@ -37,7 +31,7 @@ theme:
 
 hooks:
   - hooks/release.py          # drafts hidden until `released: true`; flat nav, newest first
-  - hooks/open_source.py      # homepage PR list, built from posts with `pr:`
+  - hooks/open_source.py      # homepage PR list, built from pages with `pr:`
 
 plugins:
   - search
@@ -45,7 +39,7 @@ plugins:
 
 extra:
   generator: false
-  default_contributors: [jatinarora30]   # used when a post has no `contributors:`
+  default_contributors: [jatinarora30]   # used when a page has no `contributors:`
   profile:                    # left-sidebar card
     name: Jatin Kumar Arora
     tagline: Robotics Engineer · Safe Autonomy

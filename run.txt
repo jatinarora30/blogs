@@ -1,4 +1,4 @@
-# Run the blog locally
+# Run Loose Notes locally
 # Open http://127.0.0.1:8000/blogs/ after starting. Press Ctrl+C to stop.
 
 # First time only: install dependencies
@@ -10,7 +10,7 @@ cd ~/blogs && .venv/bin/mkdocs serve
 # Preview only what's released (what the live site will show)
 cd ~/blogs && SHOW_DRAFTS=0 .venv/bin/mkdocs serve
 
-# New post: make new slug=my-post title="My Post"
+# New PR page: make new slug=my-pr title="My PR"
 
-# Publish to GitHub Pages: set "released: true" in the post, then
-cd ~/blogs && git add . && git commit -m "Update blog" && git push
+# Publish to GitHub Pages: set "released: true" on the PR page, then
+cd ~/blogs && git add . && git commit -m "Update PR pages" && git push

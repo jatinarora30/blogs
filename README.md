@@ -9,24 +9,24 @@ Profile: https://jatinarora30.github.io/jatin-arora.github.io/
 ```
 docs/
   index.md                 # homepage: intro + PR list (replaces <!-- OSS_PRS -->)
-  my-post.md               # one file per post; one page per PR
-  assets/my-post/          # images for that post
+  my-pr.md                 # one page per PR
+  assets/my-pr/            # images for that page
 hooks/release.py           # release gate + sidebar ordering (newest first)
 overrides/partials/        # profile card (left) and contributors box (right)
-hooks/open_source.py       # homepage PR list from posts' `pr:` / `status:`
+hooks/open_source.py       # homepage PR list from pages' `pr:` / `status:`
 templates/post.md          # PR write-up template
 ```
 
 ## Adding a PR
 
 ```bash
-make new slug=my-post title="My Post"     # creates docs/my-post.md and docs/assets/my-post/
+make new slug=my-pr title="My PR"         # creates docs/my-pr.md and docs/assets/my-pr/
 make serve                                # http://127.0.0.1:8000/blogs/ (drafts visible)
 ```
 
 ```yaml
 ---
-title: "My Post"
+title: "My PR"
 date: 2026-11-20
 released: false                 # true removes the Draft banner
 pr: https://github.com/OWNER/REPO/pull/123   # the PR this page is about
@@ -36,8 +36,8 @@ contributors: [jatinarora30]    # GitHub usernames, shown in the right sidebar
 ---
 ```
 
-- **Drafts:** posts without `released: true` still go online, with a "Draft" banner at the top. Set `released: true` to remove the banner.
-- **Images:** `![alt](assets/my-post/diagram.png)`
+- **Drafts:** pages without `released: true` still go online, with a "Draft" banner at the top. Set `released: true` to remove the banner.
+- **Images:** `![alt](assets/my-pr/diagram.png)`
 - **Commands and output:** fenced blocks with titles, e.g. ```` ```bash title="Command" ````
 - **Also supported:** math (`\( \)`, `\[ \]`), ` ```mermaid ` diagrams, and callouts (`!!! note`)
 
@@ -46,14 +46,14 @@ contributors: [jatinarora30]    # GitHub usernames, shown in the right sidebar
 ```bash
 make setup        # create .venv and install deps (once)
 make serve        # preview with drafts
-make serve-live   # preview only released posts
-make status       # released / draft for each post
+make serve-live   # preview only released pages
+make status       # released / draft for each PR page
 make build        # production build into site/
 ```
 
 ## Contributions
 
-Each post's right sidebar lists its contributors and has a **Raise a request** button, which opens an issue using `.github/ISSUE_TEMPLATE/contribution.md`. It also links to editing the page on GitHub, which leads to a PR. When you accept a contribution, add the contributor's username to `contributors:`.
+Each PR page's right sidebar lists its contributors and has a **Raise a request** button, which opens an issue using `.github/ISSUE_TEMPLATE/contribution.md`. It also links to editing the page on GitHub, which leads to a PR. When you accept a contribution, add the contributor's username to `contributors:`.
 
 ## Publishing
 
