@@ -1,4 +1,4 @@
-# Run Loose Notes locally
+# Run Upstreamed locally
 # Open http://127.0.0.1:8000/blogs/ after starting. Press Ctrl+C to stop.
 
 # First time only: install dependencies

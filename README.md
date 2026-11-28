@@ -1,4 +1,4 @@
-# Loose Notes
+# Upstreamed
 
 My open-source work. Each pull request gets its own page in `docs/`, written by hand. The homepage lists them, grouped by repo with a status badge, built by `hooks/open_source.py` from each page's `pr:` and `status:` front matter. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published to GitHub Pages at **https://jatinarora30.github.io/blogs/**.
 
