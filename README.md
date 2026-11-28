@@ -1,65 +1,45 @@
 # Upstreamed
 
-My open-source work. Each pull request gets its own page in `docs/`, written by hand. The homepage lists them, grouped by repo with a status badge, built by `hooks/open_source.py` from each page's `pr:` and `status:` front matter. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published to GitHub Pages at **https://jatinarora30.github.io/blogs/**.
+My open-source work: every pull request I've opened on other people's projects. The homepage lists them, grouped by repo, each with a status badge and a short description. The title links straight to the PR on GitHub. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published to GitHub Pages at **https://jatinarora30.github.io/blogs/**.
 
 Profile: https://jatinarora30.github.io/jatin-arora.github.io/
 
 ## Layout
 
 ```
-docs/
-  index.md                 # homepage: intro + PR list (replaces <!-- OSS_PRS -->)
-  my-pr.md                 # one page per PR
-  assets/my-pr/            # images for that page
-hooks/release.py           # release gate + sidebar ordering (newest first)
-overrides/partials/        # profile card (left) and contributors box (right)
-hooks/open_source.py       # homepage PR list from pages' `pr:` / `status:`
-templates/post.md          # PR write-up template
+prs.yml                    # the PR list: one entry per PR
+docs/index.md              # homepage: intro + PR list (replaces <!-- OSS_PRS -->)
+hooks/open_source.py       # renders prs.yml onto the homepage
+scripts/sync_prs.py        # updates status: in prs.yml from GitHub
+overrides/partials/nav.html  # profile card in the left sidebar
 ```
 
 ## Adding a PR
 
-```bash
-make new slug=my-pr title="My PR"         # creates docs/my-pr.md and docs/assets/my-pr/
-make serve                                # http://127.0.0.1:8000/blogs/ (drafts visible)
-```
+Add an entry to `prs.yml`. The file starts with a template entry (`OWNER/REPO#123`) that shows on the site as an example. Copy it for each real PR:
 
 ```yaml
----
-title: "My PR"
-date: 2026-11-20
-released: false                 # true removes the Draft banner
-pr: https://github.com/OWNER/REPO/pull/123   # the PR this page is about
-status: merged                  # merged | open | draft | closed
-tags: []
-contributors: [jatinarora30]    # GitHub usernames, shown in the right sidebar
----
+- url: https://github.com/OWNER/REPO/pull/123
+  title: Short title of what the PR does
+  status: open        # merged | open | draft | closed
+  date: 2026-11-20
+  description: One or two sentences on what was wrong and what the PR changed.
 ```
 
-- **Drafts:** pages without `released: true` still go online, with a "Draft" banner at the top. Set `released: true` to remove the banner.
-- **Images:** `![alt](assets/my-pr/diagram.png)`
-- **Commands and output:** fenced blocks with titles, e.g. ```` ```bash title="Command" ````
-- **Also supported:** math (`\( \)`, `\[ \]`), ` ```mermaid ` diagrams, and callouts (`!!! note`)
+Or run `make prs-new` to add every PR missing from the file, then fill in the descriptions.
 
 ## Commands
 
 ```bash
 make setup        # create .venv and install deps (once)
-make serve        # preview with drafts
-make serve-live   # preview only released pages
-make status       # released / draft for each PR page
+make serve        # sync statuses, then preview at http://127.0.0.1:8000/blogs/
+make prs          # update status: in prs.yml from GitHub, list PRs missing from it
+make prs-new      # same, and add the missing PRs to prs.yml
 make build        # production build into site/
 ```
 
-## Contributions
-
-Each PR page's right sidebar lists its contributors and has a **Raise a request** button, which opens an issue using `.github/ISSUE_TEMPLATE/contribution.md`. It also links to editing the page on GitHub, which leads to a PR. When you accept a contribution, add the contributor's username to `contributors:`.
+A GitHub Action (`.github/workflows/sync-prs.yml`) also updates statuses every Monday and redeploys.
 
 ## Publishing
 
-Write → `make serve` → set `released: true` → `git push`. The GitHub Actions workflow builds and deploys to Pages.
-
-One-time setup:
-1. Create a public repo `jatinarora30/blogs`. If you use a different name, update `site_url` and `repo_url` in `mkdocs.yml`.
-2. `git remote add origin git@github.com:jatinarora30/blogs.git && git push -u origin main`
-3. In the repo, go to **Settings → Pages → Source** and choose **GitHub Actions**.
+Edit `prs.yml` → `make serve` → `git push`. The GitHub Actions workflow builds and deploys to Pages.

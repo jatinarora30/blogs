@@ -1,0 +1,15 @@
+# Pull requests shown on the homepage, one entry each. Newest first by date.
+# Each title links straight to the PR on GitHub.
+#
+# - url: https://github.com/OWNER/REPO/pull/123
+#   title: Short title of what the PR does
+#   status: open          # merged | open | draft | closed (scripts/sync_prs.py keeps this up to date)
+#   date: 2026-11-20
+#   description: One or two sentences on what was wrong and what the PR changed.
+
+# Template entry: shows how a PR appears on the site. Copy it for each real PR.
+- url: https://github.com/OWNER/REPO/pull/123
+  title: "Template: Fix race condition in the executor"
+  status: merged
+  date: 2026-11-20
+  description: The executor could drop callbacks when two timers fired at once. This PR adds a lock around the ready queue and a test that reproduces the race.

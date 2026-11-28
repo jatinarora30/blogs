@@ -4,13 +4,10 @@
 # First time only: install dependencies
 cd ~/blogs && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
-# Preview with drafts (auto-reloads when you save)
+# Preview (auto-reloads when you save prs.yml)
 cd ~/blogs && .venv/bin/mkdocs serve
 
-# Preview only what's released (what the live site will show)
-cd ~/blogs && SHOW_DRAFTS=0 .venv/bin/mkdocs serve
+# Add PRs: edit prs.yml, or run `make prs-new` to add the missing ones from GitHub
 
-# New PR page: make new slug=my-pr title="My PR"
-
-# Publish to GitHub Pages: set "released: true" on the PR page, then
-cd ~/blogs && git add . && git commit -m "Update PR pages" && git push
+# Publish to GitHub Pages
+cd ~/blogs && git add . && git commit -m "Update PRs" && git push

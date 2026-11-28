@@ -37,34 +37,6 @@
 /* Figures */
 .md-typeset figure img { border-radius: .4rem; }
 
-/* Contributors box (right sidebar on posts) */
-.contrib-box {
-  margin: .6rem .6rem 1.2rem; padding: .8rem;
-  border: 1px solid var(--md-default-fg-color--lightest); border-radius: .6rem;
-  font-size: .65rem;
-}
-.contrib-box__title {
-  font-weight: 700; font-size: .6rem; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--md-default-fg-color--light); margin-bottom: .5rem;
-}
-.contrib-box__list { list-style: none; margin: 0 0 .7rem; padding: 0; display: grid; gap: .35rem; }
-.contrib-box__list a { display: flex; align-items: center; gap: .45rem; color: var(--md-default-fg-color); }
-.contrib-box__list a:hover { color: var(--md-accent-fg-color); }
-.contrib-box__list img { width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--md-default-fg-color--lightest); }
-.contrib-box__cta { margin: 0 0 .6rem; font-style: italic; color: var(--md-default-fg-color--light); line-height: 1.5; }
-.contrib-box__button {
-  display: block; text-align: center; padding: .4rem .6rem; border-radius: .4rem; font-weight: 600;
-  background: var(--md-accent-fg-color); color: var(--md-accent-bg-color) !important;
-}
-.contrib-box__button:hover { opacity: .9; }
-.contrib-box__edit { display: block; text-align: center; margin-top: .4rem; color: var(--md-default-fg-color--light) !important; }
-.contrib-box__edit:hover { color: var(--md-accent-fg-color) !important; }
-
-/* Show the contributors box only in the right sidebar; keep it in the menu on phones */
-@media screen and (min-width: 60em) {
-  .md-nav--primary .contrib-box { display: none; }
-}
-
 /* Open Source page */
 .oss-stats { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 1.5rem; }
 .oss-stat {
@@ -79,7 +51,8 @@
   margin: 0; padding: .5rem 0; border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
 .oss-title { flex: 1 1 16rem; }
-.oss-writeup { font-size: .7rem; font-weight: 600; white-space: nowrap; }
+.oss-num { font-size: .7rem; font-weight: 600; white-space: nowrap; color: var(--md-default-fg-color--light); }
+.oss-desc { flex: 1 0 100%; margin: 0; font-size: .7rem; color: var(--md-default-fg-color--light); }
 .oss-meta { font-size: .65rem; color: var(--md-default-fg-color--light); white-space: nowrap; }
 .oss-badge {
   font-size: .55rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;

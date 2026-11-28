@@ -27,11 +27,6 @@
       <span class="profile-card__link">View profile ↗</span>
     </a>
   {% endif %}
-  {% if config.repo_url %}
-    <div class="md-nav__source">
-      {% include "partials/source.html" %}
-    </div>
-  {% endif %}
   <ul class="md-nav__list" data-md-scrollfix>
     {% for nav_item in nav %}
       {% set path = "__nav_" ~ loop.index %}

@@ -1,15 +1,11 @@
 site_name: Upstreamed
 site_description: Pull requests I've opened on open-source projects.
 site_url: https://jatinarora30.github.io/blogs/
-repo_url: https://github.com/jatinarora30/blogs
-repo_name: blogs
-edit_uri: ""
 
 theme:
   name: material
   custom_dir: overrides
   features:
-    - navigation.footer       # previous / next between PR pages
     - navigation.top
     - content.code.copy
     - content.code.annotate
@@ -30,8 +26,10 @@ theme:
       toggle: { icon: material/weather-sunny, name: Light mode }
 
 hooks:
-  - hooks/release.py          # drafts hidden until `released: true`; flat nav, newest first
-  - hooks/open_source.py      # homepage PR list, built from pages with `pr:`
+  - hooks/open_source.py      # homepage PR list, built from prs.yml
+
+watch:
+  - prs.yml                   # mkdocs serve reloads when it changes
 
 plugins:
   - search
@@ -39,7 +37,6 @@ plugins:
 
 extra:
   generator: false
-  default_contributors: [jatinarora30]   # used when a page has no `contributors:`
   profile:                    # left-sidebar card
     name: Jatin Kumar Arora
     tagline: Robotics Engineer · Safe Autonomy
